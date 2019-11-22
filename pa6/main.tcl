@@ -10,9 +10,12 @@ set nodes(bs2) [$ns node]
 set nodes(is) [$ns node]
 
 $ns duplex-link $nodes(bs1) $nodes(lp) 3Mbps 10ms DropTail
-$ns duplex-link $nodes(bs2) $nodes(is) 3Mbps 30ms DropTail
+$ns duplex-link $nodes(bs2) $nodes(is) 3Mbps 50ms DropTail
 $ns duplex-link $nodes(bs1) $nodes(ms) 384000 0.15 RED
 $ns duplex-link $nodes(bs2) $nodes(ms) 384000 0.15 RED
+
+$ns queue-limit $nodes(bs1) $nodes(ms) 20
+$ns queue-limit $nodes(bs2) $nodes(ms) 20
 
 source /ns2/ns-2.35/tcl/ex/wireless-scripts/web.tcl
 
@@ -36,8 +39,8 @@ proc stop {} {
     set GETRC "/ns2/ns-2.35/bin/getrc"
     set RAW2XG "/ns2/ns-2.35/bin/raw2xg"
 
-    exec $GETRC -s $sid -d $did out.tr | $RAW2XG -a -m 100 > plot.xgr
-    exec $GETRC -s $sid -d $did out.tr | $RAW2XG -r -m 100 >> plot.xgr
+    exec $GETRC -s $sid -d $did out.tr | $RAW2XG -r -m 100 > plot.xgr
+    exec $GETRC -s $did -d $sid out.tr | $RAW2XG -a -m 100 >> plot.xgr
 
     exec xgraph -x time -y packets plot.xgr &
 

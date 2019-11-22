@@ -20,19 +20,6 @@ $ns node-config -adhocRouting DSDV \
         -antType Antenna/OmniAntenna \
         -agentTrace ON \
         -routerTrace ON
-
-$ns node-config -adhocRouting DSDV \
-        -llType LL \
-        -macType Mac/802_11 \
-        -ifqType Queue/DropTail \
-        -ifqLen 50 \
-        -topoInstance $topo \
-        -phyType Phy/WirelessPhy \
-        -channelType Channel/WirelessChannel \
-        -propType Propagation/TwoRayGround \
-        -antType Antenna/OmniAntenna \
-        -agentTrace ON \
-        -routerTrace ON
 create-god 3
 
 foreach i {0 1 2} {
