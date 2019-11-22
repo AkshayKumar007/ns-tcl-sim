@@ -11,12 +11,12 @@ proc finish {} {
     
     # flush and close trace files
     $ns flush-trace
-    foreach ftype {nam tr} {
-        close [set ${ftype}_file]
-    }
+    close $nam_file
+    close $tr_file
 
     # run awk and nam
     puts [exec awk -f prog.awk out.tr] 
     exec nam out.nam &
+    
     exit 0
 }

@@ -44,8 +44,6 @@ foreach {t1 t2} {0.1 5 7 14 0.2 8 10 15} n {0 0 2 2} {
 }
 
 proc _finish {} {
-    global tcp_0 tcp_1
-
     foreach i {0 2} {
         set file [open xgraph_$i.tr w]
         puts $file [exec awk -f prog.awk tcp_$i.tr]
