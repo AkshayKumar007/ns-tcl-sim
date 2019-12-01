@@ -11,13 +11,13 @@ set nodes(is) [$ns node]
 
 $ns duplex-link $nodes(bs1) $nodes(lp) 3Mbps 10ms DropTail
 $ns duplex-link $nodes(bs2) $nodes(is) 3Mbps 50ms DropTail
-$ns duplex-link $nodes(bs1) $nodes(ms) 9600 0.5 RED
-$ns duplex-link $nodes(bs2) $nodes(ms) 9600 0.5 RED
+$ns duplex-link $nodes(bs1) $nodes(ms) 384000 0.15 RED
+$ns duplex-link $nodes(bs2) $nodes(ms) 384000 0.15 RED
 
-$ns queue-limit $nodes(bs1) $nodes(ms) 10
-$ns queue-limit $nodes(bs2) $nodes(ms) 10
+$ns queue-limit $nodes(bs1) $nodes(ms) 20
+$ns queue-limit $nodes(bs2) $nodes(ms) 20
 
-source /ns2/ns-2.35/tcl/ex/wireless-scripts/web.tcl
+source web.tcl
 
 $ns insert-delayer $nodes(ms) $nodes(bs1) [new Delayer]
 $ns insert-delayer $nodes(ms) $nodes(bs2) [new Delayer]
@@ -49,3 +49,4 @@ proc stop {} {
 
 $ns at 100 "stop"
 $ns run
+
